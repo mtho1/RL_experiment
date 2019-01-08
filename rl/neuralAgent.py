@@ -10,6 +10,11 @@ import tensorflow as tf
 from rl import ExperienceBuffer
 class neuralAgent:
     def __init__(self,num_actions,num_states,eps):
+        defaultSess = tf.get_default_session()
+        if defaultSess is not None:
+            defaultSess.close() # close previous session
+            
+        
         tf.reset_default_graph()
         self.num_actions = num_actions
         self.num_states = num_states
