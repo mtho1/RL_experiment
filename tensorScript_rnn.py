@@ -13,11 +13,14 @@ from tensorflowOO import nnLoss
 from tensorflowOO import nnTrain
 
 #if tf.get_default_session() is None:
+defaultSess = tf.get_default_session()
+if defaultSess is not None:
+    defaultSess.close() # close previous session
 sess2 = tf.InteractiveSession()
 
 
 
-myNet=rnn.rnn(2,1,10)
+myNet=rnn.rnn(3,2,10)
 myLoss = nnLoss.nnLoss(myNet.out)
 myOptim = nnTrain.nnTrain(myLoss.lossFun)
 
@@ -26,10 +29,14 @@ myOptim = nnTrain.nnTrain(myLoss.lossFun)
 init = tf.global_variables_initializer()
 init.run()
 
-x = np.random.rand(10,2)
-x[:,0] = np.linspace(-2,2,10)
-x[:,1] = np.linspace(-2,2,10)**2
-y =np.sin(x[:,0]+x[:,1])
+x = np.random.rand(100,3)
+x[:,0] = np.linspace(-3,3,100)
+x[:,1] = np.linspace(-3,3,100)**2
+x[:,2] = x[:,0]+0.5*x[:,1]
+y = np.random.rand(100,2)
+y[:,0] =np.sin(x[:,0]) - np.cos(x[:,1])
+y[:,1] =x[:,0]
+
 #y=np.sin(x[:,0])+x[:,1]
 for it in range(0,1000):
     myNet.train(myOptim,myLoss,x,y)

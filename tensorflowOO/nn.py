@@ -44,5 +44,9 @@ class slnn:
     def computeOutput(self,data_in):
         out = self.out.eval(feed_dict={self.input: data_in})
         return out
+    
+    def clearHiddenState(self):
+        #this is only needed for rnn
+        return -1
         
     

@@ -5,6 +5,7 @@ Created on Wed Jan  2 07:50:12 2019
 @author: Micha
 """
 from tensorflowOO import *
+from tensorflowOO import rnn
 import numpy as np
 import tensorflow as tf
 from rl import ExperienceBuffer
@@ -12,8 +13,7 @@ class neuralAgent:
     def __init__(self,num_actions,num_states,eps):
         defaultSess = tf.get_default_session()
         if defaultSess is not None:
-            defaultSess.close() # close previous session
-            
+            defaultSess.close() # close previous session        
         
         tf.reset_default_graph()
         self.num_actions = num_actions
@@ -23,7 +23,8 @@ class neuralAgent:
         self.lastAction = []
         self.lr = 0.2
         self.num_hidden = 10
-        self.nn = nn.slnn(self.num_states,self.num_actions,self.num_hidden)
+        #self.nn = nn.slnn(self.num_states,self.num_actions,self.num_hidden)
+        self.nn = rnn.rnn(self.num_states,self.num_actions,self.num_hidden)
         self.myLoss = nnLoss.nnLoss(self.nn.out)
         self.myOptim = nnTrain.nnTrain(self.myLoss.lossFun)
         self.tf_sess = tf.InteractiveSession()
@@ -127,7 +128,8 @@ class neuralAgent:
         
     def __del__(self):
         tf.InteractiveSession.close(self.tf_sess)
-        
+    def clearHidden(self):
+        self.nn.clearHiddenState()
             
     
     

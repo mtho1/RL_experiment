@@ -27,6 +27,7 @@ tie = 0
 for episode in range(1,100001):
     game.resetGame()
     agent.validateAllActions()
+    agent.clearHidden()
     while game.gameOver == False:
         if agent.agent_type == 'neural':
             currentState = game.board
