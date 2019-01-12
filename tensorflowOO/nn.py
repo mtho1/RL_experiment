@@ -31,7 +31,13 @@ class slnn:
         data_in.shape = shapeD
         self.lr = max(1e-5,lr*0.99999)
     def computeLoss(self,myLoss,data_in,truth):
+        shapeD = data_in.shape
+        shapeT = truth.shape
+        data_in.shape = (-1,self.num_in)
+        truth.shape = (-1,self.num_out)
         lossVal = myLoss.lossFun.eval(feed_dict={self.input: data_in, myLoss.truth: truth})
+        truth.shape = shapeT
+        data_in.shape = shapeD
         return lossVal
     
     def computeOutput(self,data_in):

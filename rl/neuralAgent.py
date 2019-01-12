@@ -17,7 +17,7 @@ class neuralAgent:
         self.lastState = []
         self.lastAction = []
         self.lr = 0.2
-        self.num_hidden = 100
+        self.num_hidden = 10
         self.nn = nn.slnn(self.num_states,self.num_actions,self.num_hidden)
         self.myLoss = nnLoss.nnLoss(self.nn.out)
         self.myOptim = nnTrain.nnTrain(self.myLoss.lossFun)
