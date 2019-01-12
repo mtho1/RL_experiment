@@ -12,6 +12,7 @@ class slnn:
         self.num_out = num_out
         self.num_hidden = num_hidd
         self.scope = 'myNN'
+        #inititializer = tf.initializers.random_normal(0,1e-10)
         self.input = tf.placeholder(tf.float32,shape=(None,num_in),name='input') #None is auto determined
         self.hid = tf.contrib.layers.fully_connected(self.input, self.num_hidden, scope='hidL',activation_fn=tf.nn.sigmoid)
         self.hid2 = tf.contrib.layers.fully_connected(self.hid, self.num_hidden, scope='hidL2',activation_fn=tf.nn.sigmoid)

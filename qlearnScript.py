@@ -8,7 +8,7 @@ Created on Mon Dec 31 20:58:22 2018
 #autoreload 2
 import numpy as np
 #from  importlib import reload 
-from rl import tictacToe
+from rl.models import tictacToe
 from rl import qlearn
 from rl import randAgent
 from rl import neuralAgent
@@ -58,7 +58,7 @@ for episode in range(1,100001):
         tie += 1
     else:
         raise Exception('invlaid status')
-    if np.mod(episode,1000)==0:
+    if np.mod(episode,100)==0:
         print((wins,loss,tie))
         print(wins/(wins+loss+tie))
         print(loss/(wins+loss+tie))
