@@ -65,7 +65,7 @@ class rnn:
             self.initial_state = tf.placeholder(tf.float32,shape=(self.num_hidden),name='initial_state')
             self.states = tf.scan(self.rnn_step, self.inputs,initializer=self.initial_state, name='states')
         with tf.variable_scope('output',reuse=tf.AUTO_REUSE):
-            self.W_y = tf.get_variable('W_x',shape=[self.num_hidden,self.num_out])
+            self.W_y = tf.get_variable('W_y',shape=[self.num_hidden,self.num_out])
             self.b_y = tf.get_variable('by',shape=[self.num_out])
             self.out = tf.matmul(self.states, self.W_y) + self.b_y
     def computeOutput(self,data_in):
